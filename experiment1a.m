@@ -15,7 +15,8 @@
 %           Johns Hopkins University Press, Baltimore, 2013.
 %
 %   [Fr19]  François Beauducel. Round with significant digits. Available at 
-%           Mathwork's website: https://www.mathworks.com/matlabcentral/fileexchange/26212-round-with-significant-digits?s_tid=srchtitle
+%           Mathwork's website: 
+%           https://www.mathworks.com/matlabcentral/fileexchange/26212-round-with-significant-digits?s_tid=srchtitle
 %           Accessed 6 May, 2019.
 
 % Add path to roundsd function
