@@ -29,7 +29,6 @@
 noise_level = 1e-3;
 no_trials = 1e+2;
 max_no_recursions = 5;
-mat_size = n^max_no_recursions*10;
 mat_type = 'normal';
 
 %% Create/load approximate algorithm
@@ -37,6 +36,7 @@ mat_type = 'normal';
 strassen_decomp
 %laderman_decomp
 n = sqrt(size(Y{1},1));
+mat_size = n^max_no_recursions*10;
 
 % This is some old code I used when I wanted to try this experiment with an
 % actual low-rank 3 by 3 matrix multiplication algorithm we had found.

@@ -16,8 +16,7 @@
 % mat_type: Control what type of matrices are used in the multiplication.
 
 no_trials = 1e+4;
-max_no_recursions = 5;
-mat_size = n^max_no_recursions*10;
+max_no_recursions = 3;
 mat_type = 'normal';
 
 %% Create/load exact algorithm
@@ -25,6 +24,7 @@ mat_type = 'normal';
 strassen_decomp
 %laderman_decomp
 n = sqrt(size(Y{1},1));
+mat_size = n^max_no_recursions*10;
 
 %% Generate the matrices, compute true C, and do precision conversions
 
