@@ -1,5 +1,5 @@
-% EXPERIMENT2 Compute and plot error of average for randomized matrix
-% product.
+% EXPERIMENT2 Compute and plot error of average for randomized approximate
+% matrix product. Used for computations in Figure 1.
 %
 %   EXPERIMENT2 is a script that computes and plots the error of the
 %   average output by the randomized matrix multiplication algorithm.

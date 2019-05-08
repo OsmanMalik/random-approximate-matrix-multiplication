@@ -1,5 +1,5 @@
 % EXPERIMENT1A Test accuracy of Strassen's algorithm for specific random
-% configuration.
+% configuration. Used for computations in Section 2.2 of paper.
 %
 %   EXPERIMENT1A is a script that computes the error in Strassen's
 %   algorithm in a setting with limited precision. This is done by

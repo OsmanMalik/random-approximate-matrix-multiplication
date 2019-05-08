@@ -1,4 +1,5 @@
-% EXPERIMENT3 Experiment on impact of randomization on error.
+% EXPERIMENT3 Experiment on impact on error of randomization of approximate
+% algorithm. Used for computations in Figure 2.
 %
 %   EXPERIMENT3 is a script for running an experiment on how the error
 %   changes when randomization is introduced in an approximate bilinear
@@ -62,9 +63,8 @@ X = tensor(ktensor(Y)); X = X.data;
 X_approx = tensor(ktensor(Y_approx)); X_approx = X_approx.data;
 epsilon = sum(X_approx(X==1)-1)/(n^3);
 
-%% Run computation
+%% Generate the matrices and compute true C
 
-% Generate the matrices and compute true C
 switch mat_type
     case 'hilbert' % Hilbert matrices
         A = hilb(mat_size);
@@ -98,6 +98,8 @@ switch mat_type
 end
 C = A*B;
 normC = norm(C, 'fro');
+
+%% Run computation
 
 % Create matrix that will store the errors
 C_error = zeros(4, max_no_recursions);

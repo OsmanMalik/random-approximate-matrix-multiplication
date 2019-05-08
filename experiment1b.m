@@ -1,4 +1,5 @@
 % EXPERIMENT1B Compute average accuracy of randomized Strassen's algorithm.
+% Used for computations in Section 2.2 of paper.
 %
 %   EXPERIMENT1B is a script that computes the average, or expected value,
 %   of a randomized version of Strassen's algorithm in a setting with
