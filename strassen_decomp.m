@@ -1,12 +1,12 @@
+function Y = strassen_decomp()
 % STRASSEN_DECOMP Create the CP tensor corresponding to Strassen.
 %
-%   This script requires Tensor Toolbox version 2.6 [Ba15].
+%   This function requires Tensor Toolbox version 2.6 [Ba15].
 %
-%   STRASSEN_DECOMP is a script that compute the tensor corresponding to
-%   the Strassen matrix multiplication algorithm. Specifically, this is the
-%   version of the algorithm described in Section 1.3.11 in [Go13]. The
-%   tensor is stored in X_strassen. The factor matrices are also stored in
-%   the cell Y.
+%   Y = STRASSEN_DECOMP() returns the tensor corresponding to the Strassen
+%   matrix multiplication algorithm. Specifically, this is the version of
+%   the algorithm described in Section 1.3.11 in [Go13]. The output Y is a
+%   cell containing the factor matrices corresponding to the tensor.
 %   
 % REFERENCES:
 %
@@ -17,6 +17,7 @@
 %   [Go13]  G. H. Golub, C. F. Van Loan. Matrix Computations. 4th Edition.
 %           Johns Hopkins University Press, Baltimore, 2013.
 
+% Create initialize alpha, beta, gamma tensors
 alpha_tensor = zeros(2,2,7);
 beta_tensor = zeros(2,2,7);
 gamma_tensor = zeros(2,2,7);
@@ -61,13 +62,11 @@ gamma_tensor(2, 1, [2 4]) = [1 1];
 gamma_tensor(2, 2, [1 2 3 6]) = [1 -1 1 1];
 
 
-%% Compute factor matrices and create tensor
-
+% Compute factor matrices and create tensor
 Y = cell(3,1);
-
 Y{1} = double(tenmat(alpha_tensor,3)).';
 Y{2} = double(tenmat(beta_tensor,3)).';
 temp = double(tenmat(gamma_tensor,3));
 Y{3} = temp(:, repmat([1 3], 1, 2) + repelem([0 1], 1, 2)).';
 
-X_strassen = tensor(ktensor(Y));
+end

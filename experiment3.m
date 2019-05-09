@@ -28,37 +28,16 @@
 
 noise_level = 1e-3;
 no_trials = 1e+2;
-max_no_recursions = 5;
-mat_type = 'normal';
+max_no_recursions = 2;
+mat_type = 'uniform';
 
 %% Create/load approximate algorithm
 
-strassen_decomp
-%laderman_decomp
+Y = strassen_decomp();
+Y_approx = perturb_strassen(Y, noise_level);
 n = sqrt(size(Y{1},1));
 mat_size = n^max_no_recursions*10;
 
-% This is some old code I used when I wanted to try this experiment with an
-% actual low-rank 3 by 3 matrix multiplication algorithm we had found.
-% I'm not doing that now though since it's extremely slow to use.
-%{
-load('A_r20_random_search_k_10382')
-Y_approx = A;
-clear A;
-temp1 = 100*max(abs(Y_approx{1}(:)));
-temp2 = 100*max(abs(Y_approx{2}(:)));
-Y_approx{1} = Y_approx{1}/temp1;
-Y_approx{2} = Y_approx{2}/temp2;
-Y_approx{3} = temp1*temp2*Y_approx{3};
-%}
-
-Y_approx = Y;
-for k = 1:3
-    idx = find(Y{k} == 0);
-    idx = idx(randsample(length(idx), round(length(idx)/3)));
-    idx = [idx; find(Y{k} == 1)];
-    Y_approx{k}(idx) = Y_approx{k}(idx) + noise_level*randn(size(idx));
-end
 X = tensor(ktensor(Y)); X = X.data;
 X_approx = tensor(ktensor(Y_approx)); X_approx = X_approx.data;
 epsilon = sum(X_approx(X==1)-1)/(n^3);
@@ -127,8 +106,8 @@ xlabel('Number of recursions')
 ylabel('Error')
 
 % Set size of plot
-x0 = 10;
-y0 = 10;
+x0 = 500;
+y0 = 500;
 width = 430;
 height = 130;
 set(gcf,'units','points','position',[x0,y0,width,height])

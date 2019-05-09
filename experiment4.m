@@ -15,14 +15,13 @@
 % mat_size: The size of the matrices multiplied.
 % mat_type: Control what type of matrices are used in the multiplication.
 
-no_trials = 1e+4;
+no_trials = 1e+2;
 max_no_recursions = 3;
 mat_type = 'normal';
 
 %% Create/load exact algorithm
 
-strassen_decomp
-%laderman_decomp
+Y = strassen_decomp();
 n = sqrt(size(Y{1},1));
 mat_size = n^max_no_recursions*10;
 
@@ -121,8 +120,8 @@ xlabel('Number of trials')
 ylabel('Error of average')
 
 % Set size of plot
-x0 = 10;
-y0 = 10;
+x0 = 500;
+y0 = 500;
 width = 430;
 height = 130;
 set(gcf,'units','points','position',[x0,y0,width,height])

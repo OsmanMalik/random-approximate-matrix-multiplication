@@ -13,15 +13,15 @@
 % mat_type: Control what type of matrices are used in the multiplication.
 
 no_trials = 1e+2;
-max_no_recursions = 5;
-mat_size = n^max_no_recursions*10;
+max_no_recursions = 2;
 mat_type = 'adversarial_1';
 
 %% Create/load exact algorithm
 
-strassen_decomp
+Y = strassen_decomp();
 %laderman_decomp
 n = sqrt(size(Y{1},1));
+mat_size = n^max_no_recursions*10;
 
 %% Generate the matrices, compute true C, and do precision conversions
 
@@ -96,8 +96,8 @@ xlabel('Number of recursions')
 ylabel('Error')
 
 % Set size
-x0 = 10;
-y0 = 10;
+x0 = 500;
+y0 = 500;
 width = 430;
 height = 130;
 set(gcf,'units','points','position',[x0,y0,width,height])

@@ -24,16 +24,11 @@ mat_size = n^max_no_recursions*10;
 
 %% Create/load approximate algorithm
 
-strassen_decomp
-%laderman_decomp
+Y = strassen_decomp();
+Y_approx = perturb_strassen(Y, noise_level);
 n = sqrt(size(Y{1},1));
-Y_approx = Y;
-for k = 1:3
-    idx = find(Y{k} == 0);
-    idx = idx(randsample(length(idx), round(length(idx)/3)));
-    idx = [idx; find(Y{k} == 1)];
-    Y_approx{k}(idx) = Y_approx{k}(idx) + noise_level*randn(size(idx));
-end
+mat_size = n^max_no_recursions*10;
+
 X = tensor(ktensor(Y)); X = X.data;
 X_approx = tensor(ktensor(Y_approx)); X_approx = X_approx.data;
 epsilon = sum(X_approx(X==1)-1)/(n^3);
