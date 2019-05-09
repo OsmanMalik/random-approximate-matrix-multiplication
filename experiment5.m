@@ -39,12 +39,7 @@ C_single = A_single*B_single;
 C_error = nan(5, max_no_recursions, no_trials);
 
 % Create nonrandom S and P
-S_det = cell(max_no_recursions,1);
-P_det = cell(max_no_recursions,1);
-for k = 1:max_no_recursions
-    S_det{k} = ones(3, n);
-    P_det{k} = repmat(1:n, 3, 1);
-end
+[S_det, P_det] = generate_S_P(max_no_recursions, n, false);
 
 % Compute product using deterministic exact algorithm in single precision
 % and compute error
@@ -57,15 +52,7 @@ end
 % Main loop
 for t = 1:no_trials    
     % Create random S and P
-    S_random = cell(max_no_recursions,1);
-    P_random = cell(max_no_recursions,1);
-    for k = 1:max_no_recursions
-        S_random{k} = 2*binornd(1, 0.5, 3, n) - 1;
-        P_random{k} = zeros(3,n);
-        for kk = 1:3
-            P_random{k}(kk, :) = randperm(n);
-        end
-    end
+    [S_random, P_random] = generate_S_P(max_no_recursions, n, true);
         
     for k = 1:max_no_recursions  
         C_approx_fully_random = rand_mat_mult_C_wrapper(A_single, B_single, Y, 0, S_random(1:k), P_random(1:k));
