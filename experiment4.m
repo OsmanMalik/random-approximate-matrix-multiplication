@@ -28,37 +28,7 @@ mat_size = n^max_no_recursions*10;
 
 %% Generate the matrices, compute true C, and do precision conversions
 
-switch mat_type
-    case 'hilbert' % Hilbert matrices
-        A = hilb(mat_size);
-        B = hilb(mat_size);
-    case 'binomial' % Binomial matrices
-        A = gallery('binomial', mat_size);
-        B = A;
-    case 'normal' % Standard normal matrices
-        A = randn(mat_size);
-        B = randn(mat_size);
-    case 'normal-normalized' % Normalized standard normal matrices
-        A = randn(mat_size);
-        A = A/norm(A, 'fro');
-        B = randn(mat_size);
-        B = B/norm(B, 'fro');
-    case 'uniform' % Standard uniform matrices
-        A = rand(mat_size);
-        B = rand(mat_size);
-    case 'adversarial_1' % Type 1 uniform adversarial matrices
-        A = rand(mat_size);
-        A(:, ceil(mat_size/2):end) = A(:, ceil(mat_size/2):end)/(mat_size^2);
-        B = rand(mat_size);
-        B(1:floor(mat_size/2), :) = B(1:floor(mat_size/2), :)/(mat_size^2);
-    case 'adversarial_2' % Type 2 uniform adversarial matrices
-        A = rand(mat_size);
-        A(1:floor(mat_size/2), ceil(mat_size/2):end) = A(1:floor(mat_size/2), ceil(mat_size/2):end)*(mat_size^2);
-        B = rand(mat_size);
-        B(:, 1:floor(mat_size/2)) = B(:, 1:floor(mat_size/2))/(mat_size^2);
-    otherwise
-        error('Invalid choice for matrix type');
-end
+[A, B] = generate_matrices(mat_size, mat_type);
 C = A*B;
 normC = norm(C, 'fro');
 A_single = single(A);
