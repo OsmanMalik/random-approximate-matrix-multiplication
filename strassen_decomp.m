@@ -56,11 +56,11 @@ alpha_tensor(1, 2, 7) = 1;
 alpha_tensor(2, 2, 7) = -1;
 beta_tensor(2, [1 2], 7) = [1 1];
 
+% Compute gamma tensor
 gamma_tensor(1, 1, [1 4 5 7]) = [1 1 -1 1];
 gamma_tensor(1, 2, [3 5]) = [1 1];
 gamma_tensor(2, 1, [2 4]) = [1 1];
 gamma_tensor(2, 2, [1 2 3 6]) = [1 -1 1 1];
-
 
 % Compute factor matrices and create tensor
 Y = cell(3,1);

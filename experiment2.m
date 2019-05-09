@@ -16,28 +16,25 @@
 % no_trials: This is the number of products that the average is taken over.
 % max_no_recursions: The maximum number of times the algorithm is recursed.
 % mat_size: The size of the matrices multiplied.
+% random_seed: Set the random seed used to perturb Strassen.
 
 noise_level = 1e-3;
 no_trials = 1e+2;
 max_no_recursions = 3;
-mat_size = n^max_no_recursions*10;
+mat_type = 'normal';
+random_seed = 1;
 
 %% Create/load approximate algorithm
 
 Y = strassen_decomp();
-Y_approx = perturb_strassen(Y, noise_level);
+[Y_approx, epsilon] = perturb_strassen(Y, noise_level, random_seed);
 n = sqrt(size(Y{1},1));
 mat_size = n^max_no_recursions*10;
-
-X = tensor(ktensor(Y)); X = X.data;
-X_approx = tensor(ktensor(Y_approx)); X_approx = X_approx.data;
-epsilon = sum(X_approx(X==1)-1)/(n^3);
 
 %% Run computation
 
 % Generate the matrices and compute true C
-A = randn(mat_size);
-B = randn(mat_size);
+[A, B] = generate_matrices(mat_size, mat_type);
 C = A*B;
 normC = norm(C, 'fro');
 
@@ -107,8 +104,8 @@ ax_max = max(C_error_fully_random(:));
 axis([1 no_trials ax_min*.95 ax_max*1.05])
 
 % Set size of plot
-x0 = 10;
-y0 = 10;
+x0 = 500;
+y0 = 500;
 width = 430;
 height = 130;
 set(gcf,'units','points','position',[x0,y0,width,height])

@@ -25,22 +25,22 @@
 % max_no_recursions: The maximum number of times the algorithm is recursed.
 % mat_size: The size of the matrices multiplied.
 % mat_type: Control what type of matrices are used in the multiplication.
+% random_seed: Set the random seed used to perturb Strassen.
+% plot_flag: Control if results are plotted or not.
 
 noise_level = 1e-3;
 no_trials = 1e+2;
-max_no_recursions = 2;
+max_no_recursions = 3;
 mat_type = 'uniform';
+random_seed = 1;
+plot_flag = true;
 
 %% Create/load approximate algorithm
 
 Y = strassen_decomp();
-Y_approx = perturb_strassen(Y, noise_level);
+[Y_approx, epsilon] = perturb_strassen(Y, noise_level, random_seed);
 n = sqrt(size(Y{1},1));
 mat_size = n^max_no_recursions*10;
-
-X = tensor(ktensor(Y)); X = X.data;
-X_approx = tensor(ktensor(Y_approx)); X_approx = X_approx.data;
-epsilon = sum(X_approx(X==1)-1)/(n^3);
 
 %% Generate the matrices and compute true C
 
@@ -51,7 +51,7 @@ normC = norm(C, 'fro');
 %% Run computation
 
 % Create matrix that will store the errors
-C_error = zeros(4, max_no_recursions);
+C_error = nan(2, max_no_recursions, no_trials);
 
 % Create nonrandom S and P
 S_det = cell(max_no_recursions,1);
@@ -65,7 +65,7 @@ end
 % error
 for k = 1:max_no_recursions
     C_approx_deterministic = rand_mat_mult_C_wrapper(A, B, Y_approx, epsilon, S_det(1:k), P_det(1:k));
-    C_error(1, k) = norm(C - C_approx_deterministic, 'fro')/normC;
+    C_error(1, k, 1) = norm(C - C_approx_deterministic, 'fro')/normC;
 end
 
 % Compute product using randomized approximate algorithm no_trial times and
@@ -82,32 +82,31 @@ for t = 1:no_trials
         end
     end
     
-    for k = 1:max_no_recursions
-        %C_approx_deterministic = rand_mat_mult(A, B, Y_approx, epsilon, S_det(1:k), P_det(1:k), 1);
-        %C_approx_random = rand_mat_mult(A, B, Y_approx, epsilon, S_random(1:k), P_random(1:k), 1);
-        
+    for k = 1:max_no_recursions   
         C_approx_fully_random = rand_mat_mult_C_wrapper(A, B, Y_approx, epsilon, S_random(1:k), P_random(1:k));
-        %C_approx_random_S = rand_mat_mult_C_wrapper(A, B, Y_approx, epsilon, S_random(1:k), P_det(1:k));
-        %C_approx_random_P = rand_mat_mult_C_wrapper(A, B, Y_approx, epsilon, S_det(1:k), P_random(1:k));
-        
-        C_error(2, k) = C_error(2, k) + norm(C - C_approx_fully_random, 'fro')/(normC*no_trials);
-        %C_error(3, k) = C_error(3, k) + norm(C - C_approx_random_S, 'fro')/(normC*no_trials);
-        %C_error(4, k) = C_error(4, k) + norm(C - C_approx_random_P, 'fro')/(normC*no_trials);
+        C_error(2, k, t) = norm(C - C_approx_fully_random, 'fro')/normC;
     end
 end
 
 %% Plot results
 
-% Create plot
-figure
-bar(C_error([1 2], :)')
-legend('Deterministic', 'Randomized', 'location', 'northwest')
-xlabel('Number of recursions')
-ylabel('Error')
+if plot_flag
+    % Compute errors for bar plot
+    C_error_plot = zeros(size(C_error, 1), size(C_error, 2)); 
+    C_error_plot(1, :) = C_error(1, :, 1);
+    C_error_plot(2, :) = sum(C_error(2, :, :), 3)/no_trials;
+    
+    % Create plot
+    figure
+    bar(C_error_plot')
+    legend('Deterministic', 'Randomized', 'location', 'northwest')
+    xlabel('Number of recursions')
+    ylabel('Error')
 
-% Set size of plot
-x0 = 500;
-y0 = 500;
-width = 430;
-height = 130;
-set(gcf,'units','points','position',[x0,y0,width,height])
+    % Set size of plot
+    x0 = 500;
+    y0 = 500;
+    width = 430;
+    height = 130;
+    set(gcf,'units','points','position',[x0,y0,width,height])
+end
