@@ -30,10 +30,10 @@
 
 noise_level = 1e-3;
 no_trials = 1e+2;
-max_no_recursions = 3;
-mat_type = 'uniform';
+max_no_recursions = 5;
+mat_type = 'normal';
 random_seed = 1;
-plot_flag = true;
+plot_flag = 2;
 
 %% Create/load approximate algorithm
 
@@ -77,11 +77,12 @@ end
 
 %% Plot results
 
-if plot_flag
+if plot_flag == 1
     % Compute errors for bar plot
     C_error_plot = zeros(size(C_error, 1), size(C_error, 2)); 
     C_error_plot(1, :) = C_error(1, :, 1);
-    C_error_plot(2, :) = sum(C_error(2, :, :), 3)/no_trials;
+    C_error_plot(2, :) = median(C_error(2, :, :), 3); % Use median
+    %C_error_plot(2, :) = sum(C_error(2, :, :), 3)/no_trials; % Use mean
     
     % Create plot
     figure
@@ -90,6 +91,18 @@ if plot_flag
     xlabel('Number of recursions')
     ylabel('Error')
 
+    % Set size of plot
+    x0 = 500;
+    y0 = 500;
+    width = 430;
+    height = 130;
+    set(gcf,'units','points','position',[x0,y0,width,height])
+elseif plot_flag == 2
+    colors_matlab = get(gca,'colororder');
+    x_pos = [0, .25];
+    bar_width = .2;
+    make_boxplots(C_error, colors_matlab(1:2, :), {'Deterministic', 'Randomized'}, x_pos, bar_width)
+    
     % Set size of plot
     x0 = 500;
     y0 = 500;

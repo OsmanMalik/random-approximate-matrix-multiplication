@@ -13,9 +13,9 @@
 % mat_type: Control what type of matrices are used in the multiplication.
 
 no_trials = 1e+2;
-max_no_recursions = 3;
-mat_type = 'uniform';
-plot_flag = true;
+max_no_recursions = 5;
+mat_type = 'adversarial_1';
+plot_flag = 2;
 include_refline = true;
 
 %% Create/load exact algorithm
@@ -67,11 +67,11 @@ end
 
 %% Plot results
 
-if plot_flag
+if plot_flag == 1
     % Compute errors for bar plot
     C_error_plot = zeros(size(C_error, 1), size(C_error, 2));
     C_error_plot(1:2, :) = C_error(1:2, :, 1);
-    C_error_plot(3:5, :) = sum(C_error(3:5, :, :), 3)/no_trials;
+    C_error_plot(3:5, :) = median(C_error(3:5, :, :), 3); %sum(C_error(3:5, :, :), 3)/no_trials;
     C_error_plot = C_error_plot(2:end, :);
     
      % Create plot
@@ -89,6 +89,20 @@ if plot_flag
     xlabel('Number of recursions')
     ylabel('Error')
 
+    % Set size of plot
+    x0 = 500;
+    y0 = 500;
+    width = 430;
+    height = 130;
+    set(gcf,'units','points','position',[x0,y0,width,height])
+elseif plot_flag == 2
+    colors_matlab = get(gca,'colororder');
+    x_pos = [0 .2 .4 .6];
+    bar_width = .15;
+    make_boxplots(C_error(2:end, :, :), colors_matlab(1:4, :), {'Deterministic', 'Fully randomized', 'Random sign', 'Random permutation'}, x_pos, bar_width);
+    current_y_lim = get(gca, 'ylim');
+    set(gca, 'ylim', [current_y_lim(1)*.1, current_y_lim(2)]);
+    
     % Set size of plot
     x0 = 500;
     y0 = 500;

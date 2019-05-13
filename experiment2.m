@@ -19,7 +19,7 @@
 % random_seed: Set the random seed used to perturb Strassen.
 
 noise_level = 1e-3;
-no_trials = 1e+2;
+no_trials = 1e+4;
 max_no_recursions = 3;
 mat_type = 'normal';
 random_seed = 1;

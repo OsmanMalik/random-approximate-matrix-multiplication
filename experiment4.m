@@ -15,7 +15,7 @@
 % mat_size: The size of the matrices multiplied.
 % mat_type: Control what type of matrices are used in the multiplication.
 
-no_trials = 1e+2;
+no_trials = 1e+4;
 max_no_recursions = 3;
 mat_type = 'normal';
 
@@ -74,7 +74,8 @@ end
 
 %% Plot result
 
-plot_colors = [62 150 81; 107 76 154; 204 37 41]/255;
+colors_matlab = get(gca,'colororder');
+plot_colors = colors_matlab(1:3, :);
 
 % Create plot
 figure
