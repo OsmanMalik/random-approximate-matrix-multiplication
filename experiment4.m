@@ -17,7 +17,8 @@
 
 no_trials = 1e+4;
 max_no_recursions = 3;
-mat_type = 'normal';
+%mat_type = 'normal';
+plot_flag = 3;
 
 %% Create/load exact algorithm
 
@@ -66,50 +67,52 @@ for t = 1:no_trials
         %C_sum_random_S{k} = C_sum_random_S{k} + double(rand_mat_mult_C_wrapper(A_single, B_single, Y, 0, S_random(1:k), P_det(1:k)));
         %C_sum_random_P{k} = C_sum_random_P{k} + double(rand_mat_mult_C_wrapper(A_single, B_single, Y, 0, S_det(1:k), P_random(1:k)));
         
-        C_error_fully_random(k, t) = norm(C - C_sum_fully_random{k}/t, 'fro');
-        %C_error_random_S(k, t) = norm(C - C_sum_random_S{k}/t, 'fro');
-        %C_error_random_P(k, t) = norm(C - C_sum_random_P{k}/t, 'fro');
+        C_error_fully_random(k, t) = norm(C - C_sum_fully_random{k}/t, 'fro')/normC;
+        %C_error_random_S(k, t) = norm(C - C_sum_random_S{k}/t, 'fro')/normC;
+        %C_error_random_P(k, t) = norm(C - C_sum_random_P{k}/t, 'fro')/normC;
     end
 end
 
 %% Plot result
 
-colors_matlab = get(gca,'colororder');
-plot_colors = colors_matlab(1:3, :);
+if plot_flag == 1
+    colors_matlab = get(gca,'colororder');
+    plot_colors = colors_matlab(1:3, :);
 
-% Create plot
-figure
-p1 = plot([1 no_trials], ones(1,2)*norm(C - C_single, 'fro'), '--', 'color', 'black');
-set(gca, 'YScale', 'log')
-set(gca, 'XScale', 'log')
-hold on
+    % Create plot
+    figure
+    p1 = plot([1 no_trials], ones(1,2)*norm(C - C_single, 'fro'), '--', 'color', 'black');
+    set(gca, 'YScale', 'log')
+    set(gca, 'XScale', 'log')
+    hold on
 
-% This is some old code that I currently don't use
-%{
-loglog(C_error_random_S(1,:), 'linewidth', 1, 'linestyle', ':', 'color', plot_colors(1,:))
-loglog(C_error_random_S(2,:), 'linewidth', 1, 'linestyle', ':', 'color', plot_colors(2,:))
-loglog(C_error_random_S(3,:), 'linewidth', 1, 'linestyle', ':', 'color', plot_colors(3,:))
+    % This is some old code that I currently don't use
+    %{
+    loglog(C_error_random_S(1,:), 'linewidth', 1, 'linestyle', ':', 'color', plot_colors(1,:))
+    loglog(C_error_random_S(2,:), 'linewidth', 1, 'linestyle', ':', 'color', plot_colors(2,:))
+    loglog(C_error_random_S(3,:), 'linewidth', 1, 'linestyle', ':', 'color', plot_colors(3,:))
 
-loglog(C_error_random_P(1,:), 'linewidth', 1, 'linestyle', '-.', 'color', plot_colors(1,:))
-loglog(C_error_random_P(2,:), 'linewidth', 1, 'linestyle', '-.', 'color', plot_colors(2,:))
-loglog(C_error_random_P(3,:), 'linewidth', 1, 'linestyle', '-.', 'color', plot_colors(3,:))
-%}
+    loglog(C_error_random_P(1,:), 'linewidth', 1, 'linestyle', '-.', 'color', plot_colors(1,:))
+    loglog(C_error_random_P(2,:), 'linewidth', 1, 'linestyle', '-.', 'color', plot_colors(2,:))
+    loglog(C_error_random_P(3,:), 'linewidth', 1, 'linestyle', '-.', 'color', plot_colors(3,:))
+    %}
 
-p2 = loglog(C_error_fully_random(1,:), 'linewidth', 2, 'linestyle', '-', 'color', plot_colors(1,:));
-p3 = loglog(C_error_fully_random(2,:), 'linewidth', 2, 'linestyle', '-.', 'color', plot_colors(2,:));
-p4 = loglog(C_error_fully_random(3,:), 'linewidth', 2, 'linestyle', ':', 'color', plot_colors(3,:));
+    p2 = loglog(C_error_fully_random(1,:), 'linewidth', 2, 'linestyle', '-', 'color', plot_colors(1,:));
+    p3 = loglog(C_error_fully_random(2,:), 'linewidth', 2, 'linestyle', '-.', 'color', plot_colors(2,:));
+    p4 = loglog(C_error_fully_random(3,:), 'linewidth', 2, 'linestyle', ':', 'color', plot_colors(3,:));
 
-ax_min = min(C_error_fully_random(:));
-ax_max = max(C_error_fully_random(:));
-%axis([1 no_trials ax_min*.95 ax_max*1.05])
+    ax_min = min(C_error_fully_random(:));
+    ax_max = max(C_error_fully_random(:));
+    %axis([1 no_trials ax_min*.95 ax_max*1.05])
 
-legend([p1 p2 p3 p4], {'Standard', '1 recursion', '2 recursions', '3 recursions'})
-xlabel('Number of trials')
-ylabel('Error of average')
+    legend([p1 p2 p3 p4], {'Standard', '1 recursion', '2 recursions', '3 recursions'})
+    xlabel('Number of trials')
+    ylabel('Error of average')
 
-% Set size of plot
-x0 = 500;
-y0 = 500;
-width = 430;
-height = 130;
-set(gcf,'units','points','position',[x0,y0,width,height])
+    % Set size of plot
+    x0 = 500;
+    y0 = 500;
+    width = 430;
+    height = 130;
+    set(gcf,'units','points','position',[x0,y0,width,height])
+end
