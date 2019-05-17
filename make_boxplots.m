@@ -40,7 +40,6 @@ for met = 2:no_methods
 end
 group2(1, :) = repmat(repvec, 1, no_rec);
 
-
 %{
 for rec = 1:no_rec
     x((rec-1)*((no_methods-1)*no_trials+1)+1) = C_error(1, rec, 1);
@@ -85,8 +84,6 @@ line_width = repmat([ones(1, no_methods-1) 1], 1, no_rec);
 c = get(gca, 'Children');
 h = findobj(gca,'Tag','Box');
 
-
-
 %hleg1 = legend(c(1:no_methods), legend_entries, 'location', 'northwest');
 
 xlabel('Number of recursions')
@@ -94,7 +91,7 @@ ylabel('Error')
 
 delta = 1-(x_pos(end)+bar_width);
 for rec = 2:no_rec
-    xline(rec-(delta+bar_width)/2, 'linestyle', ':');
+    xline(rec-(delta+bar_width)/2, 'linestyle', ':', 'linewidth', 1);
 end
 
 if isnan(reference_line)
@@ -103,8 +100,9 @@ else
     hline = refline([0 reference_line]);
     hline.Color = 'black';
     hline.LineStyle = '--';
+    hline.LineWidth = 2;
     legend_entries{end+1} = 'Standard';
-    legend([h(no_methods:-1:1); hline], legend_entries, 'location', 'northwest')
+    legend([h(no_methods:-1:1); hline], legend_entries, 'location', 'best')
 end
 
 shg
