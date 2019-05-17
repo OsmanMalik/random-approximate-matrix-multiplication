@@ -14,7 +14,7 @@
 
 no_trials = 1e+2;
 max_no_recursions = 5;
-mat_type = 'adversarial_1';
+mat_type = 'normal';
 plot_flag = 2;
 include_refline = true;
 
@@ -99,7 +99,7 @@ elseif plot_flag == 2
     colors_matlab = get(gca,'colororder');
     x_pos = [0 .2 .4 .6];
     bar_width = .15;
-    make_boxplots(C_error(2:end, :, :), colors_matlab(1:4, :), {'Deterministic', 'Fully randomized', 'Random sign', 'Random permutation'}, x_pos, bar_width);
+    make_boxplots(C_error(2:end, :, :), colors_matlab(1:4, :), {'Deterministic', 'Fully randomized', 'Random sign', 'Random permutation'}, x_pos, bar_width, 'reference_line', C_error(1, 1, 1));
     current_y_lim = get(gca, 'ylim');
     set(gca, 'ylim', [current_y_lim(1)*.1, current_y_lim(2)]);
     
