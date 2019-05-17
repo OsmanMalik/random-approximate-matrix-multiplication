@@ -3,10 +3,11 @@
 %
 %   EXPERIMENT1B is a script that computes the average, or expected value,
 %   of a randomized version of Strassen's algorithm in a setting with
-%   limited precision. This is done by multiplying two predetermined 2 by 2 matrices. We can compute the expected value exactly since
-%   there are only 64*8 possible values for the random variables to take,
-%   and they're all equiprobable.  The version of Strassen's algorithm used here is the one
-%   described in Section 1.3.11 in [Go13]. 
+%   limited precision. This is done by multiplying two predetermined 2 by 2
+%   matrices. We can compute the expected value exactly since there are
+%   only 64*8 possible values for the random variables to take, and they're
+%   all equiprobable. The version of Strassen's algorithm used here is the
+%   one described in Section 1.3.11 in [Go13]. 
 %
 %   This script utilizes roundsd [Fr19].
 %   
@@ -16,7 +17,8 @@
 %           Johns Hopkins University Press, Baltimore, 2013.
 %
 %   [Fr19]  François Beauducel. Round with significant digits. Available at 
-%           Mathwork's website: https://www.mathworks.com/matlabcentral/fileexchange/26212-round-with-significant-digits?s_tid=srchtitle
+%           Mathwork's website: 
+%           https://www.mathworks.com/matlabcentral/fileexchange/26212-round-with-significant-digits?s_tid=srchtitle
 %           Accessed 6 May, 2019.
 
 % Add path to roundsd function

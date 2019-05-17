@@ -2,7 +2,7 @@
 % repeatedly for different types of matrices to produce the plots in the
 % supplementary material of our paper. The results are saved in mat files
 % so that they can later be read and processed. Note that the appropriate
-% lines for need to be commented out in the scripts experiment3.m,
+% lines need to be commented out in the scripts experiment3.m,
 % experiment4.m and experiment5.m before running this code, since otherwise
 % the random_seed and mat_type chosen in this script will just be
 % overwritten by whatever is used in those scripts.

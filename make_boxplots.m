@@ -1,4 +1,12 @@
 function make_boxplots(C_error, colors, legend_entries, x_pos, bar_width, varargin)
+% MAKE_BOXPLOTS A function for making the box plots in our paper. This is a
+% work-in-progress, so the function is currently not very well-documented
+% at the moment.
+%
+%   MAKE_BOXPLOTS(C_error, colors, legend_entries, x_pos, bar_width)
+%   creates a box plot like those presented in our paper. The function is
+%   currently a work-in-progress, so it is best to look at the code below,
+%   and the code that utilize this function, to figure out how to use it.
 
 params = inputParser;
 addParameter(params, 'reference_line', nan);
@@ -32,6 +40,8 @@ end
 group(no_rec+1:end) = repmat(repvec, 1, no_trials);
 
 % Construct group vector 2
+% Old, currently unused code
+%{
 group2 = zeros(2, size(x, 2));
 group2(2, :) = repelem((1:no_rec), 1, (no_methods-1)*no_trials+1);
 repvec = 1;
@@ -39,6 +49,7 @@ for met = 2:no_methods
     repvec = [repvec met*ones(1, no_trials)]; %#ok<AGROW>
 end
 group2(1, :) = repmat(repvec, 1, no_rec);
+%}
 
 %{
 for rec = 1:no_rec

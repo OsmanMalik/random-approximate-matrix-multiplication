@@ -9,8 +9,10 @@
 % no_trials: This is the number of products that the average is taken over
 %   for the randomized methods.
 % max_no_recursions: The maximum number of times the algorithm is recursed.
-% mat_size: The size of the matrices multiplied.
 % mat_type: Control what type of matrices are used in the multiplication.
+% plot_flag: Used to control which type of plotting (if any) is used.
+% include_refline: If plot_flag is 1, then this controls if a reference
+%   line is added or not.
 
 no_trials = 1e+2;
 max_no_recursions = 5;

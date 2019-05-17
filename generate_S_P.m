@@ -1,4 +1,17 @@
 function [S, P] = generate_S_P(max_no_recursions, n, is_random)
+% GENERATE_S_P Generate random or deterministic sign and permutation
+% functions.
+%
+%   [S, P] = GENERATE_S_P(max_no_recursions, n, is_random) returns sign
+%   functions and permutation functions stored in cells. max_no_recursions
+%   control how many recursions are considered, i.e., what Q is in our
+%   paper. n controls the size of the matrices being multiplied, e.g., 2 in
+%   the case of Strassen's algorithm. is_random controls whether or not the
+%   returned cells S and P contain random quantities or not: If is_random
+%   is false, then the nonrandom sign and permutation functions are
+%   returned (i.e., corresponding to deterministic algorithm), and if
+%   is_random us true, then random sign and permutation functions are
+%   returned.
 
 if is_random
     % Create random S and P

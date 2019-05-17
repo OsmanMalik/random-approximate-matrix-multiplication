@@ -1,4 +1,17 @@
 function [Y_approx, epsilon] = perturb_strassen(Y, noise_level, random_seed)
+% PERTURB_STRASSEN Perturb the standard Strassen algorithm.
+%
+%   [Y_approx, epsilon] = PERTURB_STRASSEN(Y, noise_level, random_seed)
+%   takes an exact version of Strassen's algorithm as input Y, with Y being
+%   a cell containing the CP factor matrices corresponding to Strassen's
+%   algorithm. It then adds mean zero Gaussian noise with standard
+%   deviation noise_level to all nonzero elements of the factor matrices.
+%   For each factor matrix, it also adds noise to five randomly selected
+%   entries that are zero. random_seed is used to set the random seed
+%   before adding noise; the random number generator is reshuffled prior to
+%   exiting this function. Y_approx is a cell containing
+%   the three perturbed factor matrices. epsilon contains the quantity
+%   defined in Equation (4) of the paper.
 
 rng(random_seed);
 

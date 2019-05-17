@@ -14,8 +14,8 @@
 %          averaging the results over no_trials trials.
 %
 %   The error from the deterministic computation is then compared to the
-%   average error of the randomized computation in a plot. This experiment
-%   is done for multiple different number of recursions.
+%   error of the randomized computation in a plot. This experiment is done
+%   for multiple different number of recursions.
 
 %% Settings
 % noise_level: Control the size of the perturbations added to the exact
@@ -23,7 +23,6 @@
 % no_trials: This is the number of approximate product computations that
 %   the average is taken over. 
 % max_no_recursions: The maximum number of times the algorithm is recursed.
-% mat_size: The size of the matrices multiplied.
 % mat_type: Control what type of matrices are used in the multiplication.
 % random_seed: Set the random seed used to perturb Strassen.
 % plot_flag: Control if results are plotted or not.

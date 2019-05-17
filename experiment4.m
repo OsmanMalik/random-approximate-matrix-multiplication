@@ -1,8 +1,8 @@
 % EXPERIMENT4 Compute and plot error of average for randomized exact single
 % precision matrix product. Used for computations in Figure 3.
 %
-%   EXPERIMENT4 is a script to run an experiment with the purpose of is to
-%   exploring what the expectation of our randomized algorithms is in the
+%   EXPERIMENT4 is a script to run an experiment with the purpose of
+%   exploring what the expectation of our randomized algorithms is in the 
 %   setting of an exact fast algorithm but with numerical rounding. This is
 %   done by keeping track of how the error for the average of many
 %   independent matrix products changes as the average is taken over more
@@ -12,12 +12,12 @@
 %% Setting
 % no_trials: This is the number of products that the average is taken over.
 % max_no_recursions: The maximum number of times the algorithm is recursed.
-% mat_size: The size of the matrices multiplied.
 % mat_type: Control what type of matrices are used in the multiplication.
+% plot_flag: Control if results are plotted or not.
 
 no_trials = 1e+4;
 max_no_recursions = 3;
-%mat_type = 'normal';
+mat_type = 'normal';
 plot_flag = 3;
 
 %% Create/load exact algorithm
