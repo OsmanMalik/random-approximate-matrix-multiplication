@@ -81,7 +81,7 @@ if plot_flag == 1
 
     % Create plot
     figure
-    p1 = plot([1 no_trials], ones(1,2)*norm(C - C_single, 'fro'), '--', 'color', 'black');
+    p1 = plot([1 no_trials], ones(1,2)*norm(C - double(C_single), 'fro')/normC, '--', 'color', 'black');
     set(gca, 'YScale', 'log')
     set(gca, 'XScale', 'log')
     hold on
