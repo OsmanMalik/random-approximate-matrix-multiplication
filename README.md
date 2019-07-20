@@ -1,7 +1,7 @@
 # Randomization of Approximate Bilinear Computation for Matrix Multiplication
 This repository provides the code we use in our preprint paper 
 
-O. A. Malik and S. Becker. Randomization of Approximate Bilinear Computation for Matrix Multiplication. *arXiv:1905.07439 [cs.DS]*, 17 May 2019.
+O. A. Malik and S. Becker. Randomization of Approximate Bilinear Computation for Matrix Multiplication. *CoRR*, abs/1905.07439, 17 May 2019.
 
 It is available at https://arxiv.org/abs/1905.07439
 
@@ -25,7 +25,16 @@ There are a total of six script files in this repository that we used to run the
 * **experiment5.m**: Used for the second experiment in Section 3.2 (Figure 4 and 5) and the third set of experiments in Section B of the supplement (Figures 14-17).
 
 ## Referencing this code
-If you use our code in any of your own work, please provide a reference to this repository and/or our paper, as appropriate.
+If you use our code in any of your own work, please reference our paper:
+```
+@article{Malik-Becker-2019,
+  author    = {Osman Asif Malik and Stephen Becker},
+  title     = {Randomization of Approximate Bilinear Computation for Matrix Multiplication},
+  journal   = {CoRR},
+  volume    = {abs/1905.07439},
+  year      = {2019},
+}
+```
 
 We have done our best to include relevant references in our code to make it easier to find original resources.
 
