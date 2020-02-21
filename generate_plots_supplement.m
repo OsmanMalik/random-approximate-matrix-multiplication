@@ -5,7 +5,7 @@
 %   appropriately in .mat files. This script then simply loads those
 %   results, creates the appropriate plots, and save them as FIG files.
 
-results_dir = '../supplement_experiment_results/';
+results_dir = 'supplement_experiment_results/';
 fig_save_dir = 'figures/';
 colors_matlab = get(gca,'colororder');
 plot_colors = colors_matlab(1:3, :);
@@ -72,9 +72,9 @@ experiment5_files = dir([results_dir, 'experiment5*']);
 for f = 1:length(experiment5_files)
     load([results_dir, experiment5_files(f).name]);
     
-    x_pos = [0 .2 .4 .6];
+    x_pos = [0 .2 .4 .6 .8];
     bar_width = .15;
-    make_boxplots(C_error(2:end, :, :), colors_matlab(1:4, :), {'Deterministic', 'Fully randomized', 'Random sign', 'Random permutation'}, x_pos, bar_width, 'reference_line', C_error(1, 1, 1));
+    make_boxplots(C_error(2:end, :, :), colors_matlab(1:5, :), {'Deterministic', 'Rescaled 2x O-I', 'Fully randomized', 'Random sign', 'Random permutation'}, x_pos, bar_width, 'reference_line', C_error(1, 1, 1));
     current_y_lim = get(gca, 'ylim');
     set(gca, 'ylim', [current_y_lim(1)*.1, current_y_lim(2)]);
     
@@ -82,7 +82,7 @@ for f = 1:length(experiment5_files)
     x0 = 500;
     y0 = 500;
     width = 430;
-    height = 130;
+    height = 150;
     set(gcf,'units','points','position',[x0,y0,width,height])
     
     savefig([fig_save_dir, 'S-', strrep(experiment5_files(f).name, '_', '-'), '.fig']);
