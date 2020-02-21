@@ -34,6 +34,13 @@ switch mat_type
         A(1:floor(mat_size/2), ceil(mat_size/2):end) = A(1:floor(mat_size/2), ceil(mat_size/2):end)*(mat_size^2);
         B = rand(mat_size);
         B(:, 1:floor(mat_size/2)) = B(:, 1:floor(mat_size/2))/(mat_size^2);
+    case 'adversarial_3' % Type 3 uniform adversarial matrices
+        A = rand(mat_size);
+        A(1:floor(mat_size/2), ceil(mat_size/2):end) = A(1:floor(mat_size/2), ceil(mat_size/2):end)/(mat_size^2);
+        A(ceil(mat_size/2):end, 1:floor(mat_size/2)) = A(ceil(mat_size/2):end, 1:floor(mat_size/2))/(mat_size^2);
+        B = rand(mat_size);
+        B(1:floor(mat_size/2), ceil(mat_size/2):end) = B(1:floor(mat_size/2), ceil(mat_size/2):end)/(mat_size^2);
+        B(ceil(mat_size/2):end, 1:floor(mat_size/2)) = B(ceil(mat_size/2):end, 1:floor(mat_size/2))/(mat_size^2);
     otherwise
         error('Invalid choice for matrix type');
 end
