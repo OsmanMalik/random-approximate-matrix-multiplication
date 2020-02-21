@@ -1,6 +1,12 @@
 *.pdf
+
 *.fig
+
 *.mexw64
+
 *.ini
+
 *.mat
+
 *.asv
+figures/
