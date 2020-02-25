@@ -113,7 +113,7 @@ else
     hline.LineStyle = '--';
     hline.LineWidth = 2;
     legend_entries{end+1} = 'Standard';
-    legend([h(no_methods:-1:1); hline], legend_entries, 'location', 'best')
+    legend([h(no_methods:-1:1); hline], legend_entries, 'location', 'northoutside', 'NumColumns', 3)
 end
 
 shg

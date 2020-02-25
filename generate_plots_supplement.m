@@ -23,7 +23,7 @@ for f = 1:length(experiment3_files)
     x0 = 500;
     y0 = 500;
     width = 430;
-    height = 130;
+    height = 150;
     set(gcf,'units','points','position',[x0,y0,width,height])
     
     savefig([fig_save_dir, 'S-', strrep(experiment3_files(f).name, '_', '-'), '.fig']);
