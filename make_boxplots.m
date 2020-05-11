@@ -10,11 +10,23 @@ function make_boxplots(C_error, colors, legend_entries, x_pos, bar_width, vararg
 
 params = inputParser;
 addParameter(params, 'reference_line', nan);
+addParameter(params, 'fig_handle', nan);
+addParameter(params, 'subplot_idx', nan);
 parse(params, varargin{:});
 
 reference_line = params.Results.reference_line;
+fig_handle = params.Results.fig_handle;
+subplot_idx = params.Results.subplot_idx;
 
-fig_handle = figure;
+if ~isa(fig_handle, 'matlab.ui.Figure') % Use provided fig_handle if it exist, or create new one
+    fig_handle = figure;
+end
+figure(fig_handle);
+
+if isa(subplot_idx, 'cell') && iscell(subplot_idx) && length(subplot_idx)==3 % Set to correct subplot if applicable
+    subplot(subplot_idx{:});
+end
+
 [no_methods, no_rec, no_trials] = size(C_error);
 
 % Construct data vector
