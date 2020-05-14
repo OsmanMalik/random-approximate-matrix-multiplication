@@ -15,16 +15,25 @@
 %   line is added or not.
 
 no_trials = 100;
-max_no_recursions = 5;
-%mat_type = 'adversarial_3';
+max_no_recursions = 1;
+mat_type = 'hilbert';
 plot_flag = 2;
 include_refline = true;
+mat_base_size = 1;
+
+% Only use following to specifically state which figure to plot in, and if
+% the plot should be done as a subplot in that figure; otherwise, set both
+% (or either) to nan.
+fig_handle = nan; % Default: fig_handle = nan; Other use ex: fig_handle = my_fig_handle;
+subplot_idx = nan; % Default: subplot_idx = nan; Other use ex: subplot_idx = {1,4,2}; 
 
 %% Create/load exact algorithm
 
-Y = strassen_decomp();
+%Y = strassen_decomp();
+Y = exact_BCRL_decomp((1:7)*1e-1);
+
 n = sqrt(size(Y{1},1));
-mat_size = n^max_no_recursions*10;
+mat_size = n^max_no_recursions*mat_base_size;
 
 %% Generate the matrices, compute true C, and do precision conversions
 
@@ -112,7 +121,7 @@ elseif plot_flag == 2
     colors_matlab = get(gca,'colororder');
     x_pos = [0 .2 .4 .6 .8];
     bar_width = .15;
-    make_boxplots(C_error(2:end, :, :), colors_matlab(1:5, :), {'Deterministic', 'Rescaled 2x O-I', 'Fully randomized', 'Random sign', 'Random permutation'}, x_pos, bar_width, 'reference_line', C_error(1, 1, 1));
+    make_boxplots(C_error(2:end, :, :), colors_matlab(1:5, :), {'Deterministic', 'Rescaled 2x O-I', 'Fully randomized', 'Random sign', 'Random permutation'}, x_pos, bar_width, 'reference_line', C_error(1, 1, 1), 'fig_handle', fig_handle, 'subplot_idx', subplot_idx);
     current_y_lim = get(gca, 'ylim');
     set(gca, 'ylim', [current_y_lim(1)*.1, current_y_lim(2)]);
     

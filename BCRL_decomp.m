@@ -1,4 +1,4 @@
-function Y = BCRL_decomp(e)
+function [Y, varargout] = BCRL_decomp(e)
 %BCRL_decomp Create the CP tensor corresponding to scheme in [Bi79].
 %
 %Y = BCRL_decomp(e) computes the scheme for 12 by 12 matrix multiplication
@@ -78,6 +78,22 @@ Y{1} = U;
 Y{2} = V;
 Y{3} = W;
 
+% Compute epsilon (kappa) when necessary
+if nargout == 2
+    n = 12;
+    X = tensor(ktensor(Y));
+    epsilon = 0;
+    for i = 1:n
+        for j = 1:n
+            for l = 1:n
+                epsilon = epsilon + X(i+n*(l-1), l+n*(j-1), j+n*(i-1)) - 1;
+            end
+        end
+    end
+    epsilon = epsilon/(n^3);
+    varargout{1} = epsilon;
+end
+
 end
 
 %% Some help functions
@@ -88,4 +104,12 @@ end
 
 function A = matricize(T)
 A = reshape(T,size(T,1)*size(T,2),size(T,3));
+end
+
+function C = tkron(A,B)
+
+szA = num2cell(size(A));
+szB = num2cell(size(B));
+C = repelem(A,szB{:}) .* repmat(B,szA{:});
+
 end

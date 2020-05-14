@@ -29,17 +29,26 @@
 
 noise_level = 1e-3;
 no_trials = 1e+2;
-max_no_recursions = 5;
-mat_type = 'normal';
-random_seed = 1;
+max_no_recursions = 1;
+mat_type = 'hilbert';
+%random_seed = 1;
 plot_flag = 2;
+mat_base_size = 1;
+
+% Only use following to specifically state which figure to plot in, and if
+% the plot should be done as a subplot in that figure; otherwise, set both
+% (or either) to nan.
+fig_handle = nan; % Default: fig_handle = nan; Other use ex: fig_handle = my_fig_handle;
+subplot_idx = nan; % Default: subplot_idx = nan; Other use ex: subplot_idx = {1,4,2}; 
 
 %% Create/load approximate algorithm
 
-Y = strassen_decomp();
-[Y_approx, epsilon] = perturb_strassen(Y, noise_level, random_seed);
-n = sqrt(size(Y{1},1));
-mat_size = n^max_no_recursions*10;
+%Y = strassen_decomp();
+%[Y_approx, epsilon] = perturb_strassen(Y, noise_level, random_seed);
+[Y_approx, epsilon] = BCRL_decomp(1e-4);
+
+n = sqrt(size(Y_approx{1},1));
+mat_size = n^max_no_recursions*mat_base_size;
 
 %% Generate the matrices and compute true C
 
@@ -72,6 +81,9 @@ for t = 1:no_trials
         C_approx_fully_random = rand_mat_mult_C_wrapper(A, B, Y_approx, epsilon, S_random(1:k), P_random(1:k));
         C_error(2, k, t) = norm(C - C_approx_fully_random, 'fro')/normC;
     end
+    if C_error(2, k, t) > 1e+10
+        disp('large error');
+    end
 end
 
 %% Plot results
@@ -100,7 +112,7 @@ elseif plot_flag == 2
     colors_matlab = get(gca,'colororder');
     x_pos = [0, .25];
     bar_width = .2;
-    make_boxplots(C_error, colors_matlab(1:2, :), {'Deterministic', 'Randomized'}, x_pos, bar_width)
+    make_boxplots(C_error, colors_matlab(1:2, :), {'Deterministic', 'Randomized'}, x_pos, bar_width, 'fig_handle', fig_handle, 'subplot_idx', subplot_idx)
     
     % Set size of plot
     x0 = 500;
