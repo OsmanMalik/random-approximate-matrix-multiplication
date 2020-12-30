@@ -1,12 +1,10 @@
 # Randomization of Approximate Bilinear Computation for Matrix Multiplication
-This repository provides the code we use in our preprint paper 
+This repository provides the code we use in our paper 
 
-O. A. Malik and S. Becker. Randomization of Approximate Bilinear Computation for Matrix Multiplication. *CoRR*, abs/1905.07439, 17 May 2019.
-
-It is available at https://arxiv.org/abs/1905.07439
+Osman Asif Malik & Stephen Becker (2020) *Randomization of approximate bilinear computation for matrix multiplication*, International Journal of Computer Mathematics: Computer Systems Theory, DOI: [10.1080/23799927.2020.1861104](https://doi.org/10.1080/23799927.2020.1861104)
 
 ## Paper abstract
-We present a method for randomizing a formula for bilinear computation of matrix products. We consider the implications of such randomization when the formula itself is approximate, and when the formula is exact but its computation is plagued by numerical error due to finite precision arithmetic. Our theoretical results and numerical experiments indicate that our method can improve performance in both settings for a negligible increase in computational complexity.
+We present a method for randomizing formulas for bilinear computation of matrix products which does not increase the leading order complexity of the computation. We consider the implications of such randomization when there are two sources of error. The first source is due to the computation formula itself only being approximately correct. Such formulas come up when numerically searching for faster matrix multiplication algorithms. The second source is due to using floating point arithmetic. This kind of error is especially important when computing on low precision hardware like GPUs. Our theoretical results and numerical experiments indicate that our method can improve performance when the two kinds of error are present individually, as well as when they are present at the same time.
 
 ## Requirements
 Parts of our code relies on the following software:
@@ -20,19 +18,24 @@ In addition to the required software listed above, this repository contains some
 There are a total of six script files in this repository that we used to run the various experiments in our paper. We now describe which script was used for which experiment.
 * **experiment1a.m** and **experiment1b.m**: Used to do compute some of the quantities mentioned in Section 2.2.
 * **experiment2.m**: Used for the first experiment in Section 3.1 (Figure 1).
-* **experiment3.m**: Used for the second experiment in Section 3.1 (Figure 2) and the first set of experiments in Section B of the supplement (Figures 6-9).
-* **experiment4.m**: Used for the first experiment in Section 3.2 (Figure 3) and the second set of experiments in Section B of the supplement (Figures 10-13).
-* **experiment5.m**: Used for the second experiment in Section 3.2 (Figure 4 and 5) and the third set of experiments in Section B of the supplement (Figures 14-17).
+* **experiment3.m**: Used for the second experiment in Section 3.1 (Figures 2-4) and the first set of experiments in the appendix (Figures A1-A5).
+* **experiment4.m**: Used for the first experiment in Section 3.2 (Figures 5-6) and the second set of experiments in the appendix (Figures A6-A10).
+* **experiment5.m**: Used for the second experiment in Section 3.2 (Figures 7-13) and the third set of experiments in Section B of the supplement (Figures A11-A15).
+* **experiment6.m**: Used for the experiment in Section 3.3 (Figure 14).
 
 ## Referencing this code
 If you use our code in any of your own work, please reference our paper:
 ```
-@article{Malik-Becker-2019,
-  author    = {Osman Asif Malik and Stephen Becker},
-  title     = {Randomization of Approximate Bilinear Computation for Matrix Multiplication},
-  journal   = {CoRR},
-  volume    = {abs/1905.07439},
-  year      = {2019},
+@article{malik-becker-ijcm-cst,
+  author = { Osman Asif   Malik  and  Stephen   Becker },
+  title = {Randomization of approximate bilinear computation for matrix multiplication},
+  journal = {International Journal of Computer Mathematics: Computer Systems Theory},
+  pages = {1-40},
+  year  = {2020},
+  publisher = {Taylor & Francis},
+  doi = {10.1080/23799927.2020.1861104},
+  URL = {https://doi.org/10.1080/23799927.2020.1861104},
+  eprint = {https://doi.org/10.1080/23799927.2020.1861104}
 }
 ```
 
