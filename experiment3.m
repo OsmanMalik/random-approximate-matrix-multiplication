@@ -1,5 +1,5 @@
 % EXPERIMENT3 Experiment on impact on error of randomization of approximate
-% algorithm. Used for computations in Figure 2.
+% algorithm. Used for computations in Figures 2-4 and A1-A5.
 %
 %   EXPERIMENT3 is a script for running an experiment on how the error
 %   changes when randomization is introduced in an approximate bilinear

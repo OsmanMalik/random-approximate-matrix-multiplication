@@ -1,5 +1,6 @@
 % EXPERIMENT5 Experiment on impact on error of randomization of exact
-% algorithm in single precision. Used for computations in Figures 4 and 5.
+% algorithm in single precision. Used for computations in Figures 7-13 and
+% A11-A15.
 %
 %   EXPERIMENT5 is a script for running an experiment to verify numerically
 %   how the numerical error for an exact algorithm in single precision is

@@ -1,5 +1,6 @@
 % EXPERIMENT4 Compute and plot error of average for randomized exact single
-% precision matrix product. Used for computations in Figure 3.
+% precision matrix product. Used for computations in Figures 5-6 and A6-
+% A10.
 %
 %   EXPERIMENT4 is a script to run an experiment with the purpose of
 %   exploring what the expectation of our randomized algorithms is in the 
