@@ -15,12 +15,12 @@ Parts of our code relies on the following software:
 In addition to the required software listed above, this repository contains some C code that needs to be compiled. This can be done by executing **compile_rand_mat_mult_C.m** from the Matlab command line.
 
 ## Experiments
-There are a total of six script files in this repository that we used to run the various experiments in our paper. We now describe which script was used for which experiment.
-* **experiment1a.m** and **experiment1b.m**: Used to do compute some of the quantities mentioned in Section 2.2.
+There are a total of seven script files in this repository that we used to run the various experiments in our paper. We now describe which script was used for which experiment.
+* **experiment1a.m** and **experiment1b.m**: Used to compute some of the quantities mentioned in Section 2.2.
 * **experiment2.m**: Used for the first experiment in Section 3.1 (Figure 1).
 * **experiment3.m**: Used for the second experiment in Section 3.1 (Figures 2-4) and the first set of experiments in the appendix (Figures A1-A5).
 * **experiment4.m**: Used for the first experiment in Section 3.2 (Figures 5-6) and the second set of experiments in the appendix (Figures A6-A10).
-* **experiment5.m**: Used for the second experiment in Section 3.2 (Figures 7-13) and the third set of experiments in Section B of the supplement (Figures A11-A15).
+* **experiment5.m**: Used for the second experiment in Section 3.2 (Figures 7-13) and the third set of experiments in the appendix (Figures A11-A15).
 * **experiment6.m**: Used for the experiment in Section 3.3 (Figure 14).
 
 ## Referencing this code
