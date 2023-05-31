@@ -8,7 +8,8 @@ We present a method for randomizing formulas for bilinear computation of matrix 
 
 ## Requirements
 Parts of our code relies on the following software:
-* Tensor Toolbox version 2.6 by Bader, Kolda and others (available at http://www.sandia.gov/~tgkolda/TensorToolbox/).
+* Tensor Toolbox by Bader, Kolda and others (available at https://www.tensortoolbox.org). 
+We used version 2.6 of Tensor Toolbox in our work, but newer versions should also work fine.
 * Round with significant digits by François Beauducel (available at https://www.mathworks.com/matlabcentral/fileexchange/26212-round-with-significant-digits).
 
 ## Installation
